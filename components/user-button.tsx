@@ -1,24 +1,23 @@
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
-import { Button } from "./ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
-import { signIn, signOut, useSession } from "@hono/auth-js/react"
+} from "./ui/dropdown-menu";
+import { signIn, signOut, useSession, pro } from "@hono/auth-js/react";
 
 export default function UserButton() {
-
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   return (
     <>
       {!session ? (
-        <Button onClick={() => signIn("github")}>Sign In</Button>
-      ) :
-        (<DropdownMenu>
+        <Button onClick={() => signIn()}>Sign In</Button>
+      ) : (
+        <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative w-8 h-8 rounded-full">
               <Avatar className="w-8 h-8">
@@ -44,13 +43,20 @@ export default function UserButton() {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuItem>
-              <Button variant="ghost" className="w-full p-0" onClick={() => signOut()}>
+              <Button
+                variant="ghost"
+                className="w-full p-0"
+                onClick={() => {
+                  console.log("signOut");
+                  signOut();
+                }}
+              >
                 Sign Out
               </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        )}
+      )}
     </>
-  )
+  );
 }
