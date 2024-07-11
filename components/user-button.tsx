@@ -7,7 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { signIn, signOut, useSession, pro } from "@hono/auth-js/react";
+import { signIn, signOut, useSession } from "@hono/auth-js/react";
 
 export default function UserButton() {
   const { data: session } = useSession();
