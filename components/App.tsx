@@ -19,6 +19,14 @@ export default function App() {
       });
   }, []);
 
+  const evtSource = new EventSource("http://localhost:8787/task/sse", {
+    withCredentials: true,
+  });
+
+  evtSource.addEventListener("time-update", (event) => {
+    console.log(event.lastEventId, event.data);
+  });
+
   return (
     <SessionProvider>
       <Layout>
